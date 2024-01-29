@@ -103,12 +103,13 @@ return {
 				"ocamllsp",
 				"hls",
 				"biome",
-				"ruby_ls",
 				"prismals",
 				"svelte",
+				-- "hls",
 				"tailwindcss",
 				"jsonls",
 				"pyright",
+				"rust_analyzer",
 			}
 
 			for _, server in ipairs(servers) do
@@ -124,6 +125,19 @@ return {
 					},
 				})
 			end
+
+			lspconfig["hls"].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				filetypes = { "haskell", "lhaskell", "cabal" },
+				handlers = {
+					["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+						virtual_text = true,
+						signs = true,
+						update_in_insert = false,
+					}),
+				},
+			})
 
 			local function organize_imports()
 				local params = {
@@ -193,7 +207,9 @@ return {
 	{
 		"dmmulroy/tsc.nvim",
 		config = function()
-			require("tsc").setup()
+			require("tsc").setup({})
 		end,
 	},
+
+	"JoosepAlviste/nvim-ts-context-commentstring",
 }

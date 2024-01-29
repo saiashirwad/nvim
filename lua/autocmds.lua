@@ -25,6 +25,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = "kitty.conf",
+	callback = function()
+		vim.cmd("!kitty @ set-colors --all --configured ~/.config/kitty/kitty.conf")
+	end,
+})
+
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 -- 	pattern = "yabairc",
 -- 	callback = function()

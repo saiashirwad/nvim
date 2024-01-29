@@ -23,6 +23,8 @@ return {
 					typescriptreact = { "biome" },
 					prisma = { "prisma" },
 					python = { "black" },
+					haskell = { "fourmolu" },
+					ocaml = { "ocamlformat" },
 				},
 				formatters = {
 					prisma = {

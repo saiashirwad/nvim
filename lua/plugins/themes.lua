@@ -1,37 +1,31 @@
 return {
 
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"folke/tokyonight.nvim",
+		name = "tokyonight",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				transparent_background = true,
-				no_italic = true,
+			require("tokyonight").setup({
+				dim_inactive = false,
+				styles = {
+					-- sidebars = "transparent",
+					-- floats = "transparent",
+				},
+				on_highlights = function(hl, c)
+					hl.LspDiagnosticsDefaultHint = { fg = c.blue }
+					hl.LspDiagnosticsDefaultInformation = { fg = c.blue }
+					hl.LspDiagnosticsDefaultWarning = { fg = c.yellow }
+					hl.LspDiagnosticsDefaultError = { fg = c.red }
+					-- remove telescope background
+					hl.TelescopeNormal = { bg = "NONE" }
+					hl.TelescopeBorder = { bg = "NONE" }
+					hl.TelescopePromptBorder = { bg = "NONE" }
+					hl.TelescopeResultsBorder = { bg = "NONE" }
+					hl.TelescopePreviewBorder = { bg = "NONE" }
+				end,
 			})
-			vim.cmd([[colorscheme catppuccin]])
+
+			vim.cmd([[colorscheme tokyonight-storm]])
 		end,
 	},
-	-- {
-	-- 	"Tsuzat/NeoSolarized.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require("NeoSolarized").setup({
-	-- 			transparent = true,
-	-- 			enable_italics = false,
-	-- 			styles = {
-	-- 				-- Style to be applied to different syntax groups
-	-- 				comments = { italic = true },
-	-- 				keywords = { italic = false },
-	-- 				functions = { bold = false },
-	-- 				variables = {},
-	-- 				string = { italic = false },
-	-- 				underline = false,
-	-- 				undercurl = false,
-	-- 			},
-	-- 		})
-	-- 		vim.cmd([[colorscheme NeoSolarized]])
-	-- 	end,
-	-- },
 }

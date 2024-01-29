@@ -41,4 +41,14 @@ return {
 		event = "VeryLazy",
 		lazy = false,
 	},
+
+	{ "mg979/vim-visual-multi", lazy = false },
+
+	{
+		"chrisgrieser/nvim-recorder",
+		-- dependencies = "rcarriga/nvim-notify", -- optional
+		opts = {}, -- required even with default settings, since it calls `setup()`
+	},
+
+	"duane9/nvim-rg",
 }
