@@ -42,10 +42,12 @@ return {
 	},
 
 	{
-		lazy = false,
-		"windwp/nvim-ts-autotag",
-		config = function()
-			require("nvim-ts-autotag").setup()
+		"stevearc/oil.nvim",
+		init = function()
+			vim.keymap.set("n", "<leader>oi", "<cmd>Oil<CR>")
 		end,
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 }

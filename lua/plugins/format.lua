@@ -25,6 +25,8 @@ return {
 					python = { "black" },
 					haskell = { "fourmolu" },
 					ocaml = { "ocamlformat" },
+					c = { "clang-format" },
+					cpp = { "clang-format" },
 				},
 				formatters = {
 					prisma = {

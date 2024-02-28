@@ -32,6 +32,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	end,
 })
 
+vim.api.nvim_create_user_command("ClangFormat", function()
+	vim.cmd([[ :%!clang-format ]])
+end, {
+	nargs = 0,
+})
+
+-- create neovim commmand clang format
+
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 -- 	pattern = "yabairc",
 -- 	callback = function()

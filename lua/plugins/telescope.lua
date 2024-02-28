@@ -33,55 +33,55 @@ return {
 				{
 					"<leader>ff",
 					function()
-						telescope.find_files(vertical_layout)
+						telescope.find_files()
 					end,
 				},
 				{
 					"<leader>fc",
 					function()
-						telescope.find_files({
-							search_dirs = { "~/.config" },
-							layout_strategy = "vertical",
-							layout_config = {
-								width = 0.8,
-							},
-						})
+						telescope.find_files({ search_dirs = { "~/.config" } })
 					end,
 				},
 				{
 					"<leader>fv",
 					function()
-						telescope.find_files({
-							search_dirs = { "~/.config/nvim" },
-							layout_strategy = "vertical",
-							layout_config = {
-								width = 0.8,
-							},
-						})
+						telescope.find_files({ search_dirs = { "~/.config/nvim" } })
 					end,
 				},
 				{
 					"<leader>rr",
 					function()
-						extensions.refactoring.refactors(cursor_layout)
+						extensions.refactoring.refactors()
 					end,
 				},
 				{
 					"<leader>fw",
 					function()
-						telescope.live_grep(vertical_layout)
+						telescope.live_grep()
+					end,
+				},
+				{
+					"gd",
+					function()
+						telescope.lsp_definitions()
+					end,
+				},
+				{
+					"<C-g><C-g>",
+					function()
+						vim.cmd([[ vsplit ]])
+						telescope.lsp_definitions()
 					end,
 				},
 				{
 					"<leader>fb",
 					function()
-						telescope.buffers(vertical_layout)
+						telescope.buffers()
 					end,
 				},
 				{ "<leader>fh", telescope.help_tags },
-				-- { "gr", telescope.lsp_references },
-				-- { "<leader>fp", extensions.projects.projects },
 				{ "<leader>fs", telescope.lsp_document_symbols },
+				{ "<leader>ws", telescope.lsp_workspace_symbols },
 				{ "<leader>fd", telescope.diagnostics },
 				{
 					"<leader>fe",
@@ -92,6 +92,7 @@ return {
 			}
 		end,
 		opts = function()
+			local actions = require("telescope.actions")
 			return {
 				defaults = vim.tbl_extend(
 					"force",
@@ -115,6 +116,65 @@ return {
 						},
 					}
 				),
+
+				pickers = {
+					live_grep = {
+						theme = "dropdown",
+					},
+
+					grep_string = {
+						theme = "dropdown",
+					},
+
+					find_files = {
+						theme = "dropdown",
+						previewer = false,
+					},
+
+					buffers = {
+						theme = "dropdown",
+						previewer = false,
+						initial_mode = "normal",
+						mappings = {
+							i = {
+								["<C-d>"] = actions.delete_buffer,
+							},
+							n = {
+								["dd"] = actions.delete_buffer,
+							},
+						},
+					},
+
+					planets = {
+						show_pluto = true,
+						show_moon = true,
+					},
+
+					colorscheme = {
+						enable_preview = true,
+					},
+
+					lsp_references = {
+						theme = "dropdown",
+						initial_mode = "normal",
+					},
+
+					lsp_definitions = {
+						theme = "dropdown",
+						initial_mode = "normal",
+					},
+
+					lsp_declarations = {
+						theme = "dropdown",
+						initial_mode = "normal",
+					},
+
+					lsp_implementations = {
+						theme = "dropdown",
+						initial_mode = "normal",
+					},
+				},
+
 				extensions = {
 					fzf = {
 						fuzzy = true,

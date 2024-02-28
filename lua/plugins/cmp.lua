@@ -4,37 +4,7 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			{
-				"L3MON4D3/LuaSnip",
-				dependencies = "rafamadriz/friendly-snippets",
-				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-				config = function(_, opts)
-					require("luasnip").config.set_config(opts)
-
-					require("luasnip.loaders.from_vscode").lazy_load()
-					require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.vscode_snippets_path or "" })
-
-					require("luasnip.loaders.from_snipmate").load()
-					require("luasnip.loaders.from_snipmate").lazy_load({ paths = vim.g.snipmate_snippets_path or "" })
-
-					require("luasnip.loaders.from_lua").load()
-					require("luasnip.loaders.from_lua").lazy_load({ paths = vim.g.lua_snippets_path or "" })
-
-					vim.api.nvim_create_autocmd("InsertLeave", {
-						callback = function()
-							if
-								require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-								and not require("luasnip").session.jump_active
-							then
-								require("luasnip").unlink_current()
-							end
-						end,
-					})
-				end,
-			},
-
-			{
 				"delphinus/cmp-ctags",
-				"saadparwaiz1/cmp_luasnip",
 				"hrsh7th/cmp-nvim-lua",
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-buffer",
@@ -43,6 +13,7 @@ return {
 		},
 		opts = function()
 			local cmp = require("cmp")
+			local icons = require("icons")
 			return {
 				completion = {
 					completeopt = "menu,menuone",
@@ -80,9 +51,29 @@ return {
 						"s",
 					}),
 				},
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
+				formatting = {
+					fields = { "kind", "abbr", "menu" },
+					format = function(entry, vim_item)
+						vim_item.kind = icons.kind[vim_item.kind]
+						vim_item.menu = ({
+							nvim_lsp = "",
+							nvim_lua = "",
+							buffer = "",
+							path = "",
+							emoji = "",
+						})[entry.source.name]
+
+						if entry.source.name == "emoji" then
+							vim_item.kind = icons.misc.Smiley
+							vim_item.kind_hl_group = "CmpItemKindEmoji"
+						end
+
+						if entry.source.name == "cmp_tabnine" then
+							vim_item.kind = icons.misc.Robot
+							vim_item.kind_hl_group = "CmpItemKindTabnine"
+						end
+
+						return vim_item
 					end,
 				},
 				sources = {

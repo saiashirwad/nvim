@@ -5,7 +5,6 @@ local on_attach = function(client)
 	client.server_capabilities.documentRangeFormattingProvider = false
 
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover)
@@ -56,20 +55,16 @@ return {
 	},
 
 	{
-		"laytan/tailwind-sorter.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
-		build = "cd formatter && npm i && npm run build",
-		config = true,
-	},
-
-	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"jose-elias-alvarez/typescript.nvim",
-			init = function() end,
+			{
+				"jose-elias-alvarez/typescript.nvim",
+				init = function() end,
+			},
 		},
 		init = function()
 			utils.lazy_load("nvim-lspconfig")
+			local icons = require("icons")
 
 			local lspconfig = require("lspconfig")
 
@@ -105,24 +100,43 @@ return {
 				"biome",
 				"prismals",
 				"svelte",
-				-- "hls",
 				"tailwindcss",
 				"jsonls",
 				"pyright",
 				"rust_analyzer",
+				"astro",
 			}
+
+			local default_diagnostic_config = {
+				signs = {
+					active = true,
+					values = {
+						{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
+						{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+						{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+						{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+					},
+				},
+				virtual_text = false,
+				update_in_insert = false,
+				underline = true,
+				severity_sort = true,
+				float = {
+					focusable = true,
+					style = "minimal",
+					border = "rounded",
+					source = "always",
+					header = "",
+					prefix = "",
+				},
+			}
+
+			vim.diagnostic.config(default_diagnostic_config)
 
 			for _, server in ipairs(servers) do
 				lspconfig[server].setup({
 					on_attach = on_attach,
 					capabilities = capabilities,
-					handlers = {
-						["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-							virtual_text = true,
-							signs = true,
-							update_in_insert = false,
-						}),
-					},
 				})
 			end
 
@@ -130,13 +144,6 @@ return {
 				on_attach = on_attach,
 				capabilities = capabilities,
 				filetypes = { "haskell", "lhaskell", "cabal" },
-				handlers = {
-					["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-						virtual_text = true,
-						signs = true,
-						update_in_insert = false,
-					}),
-				},
 			})
 
 			local function organize_imports()
