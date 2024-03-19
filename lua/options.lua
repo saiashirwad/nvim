@@ -15,7 +15,7 @@ opt.scrolloff = 3
 opt.shiftwidth = 2
 opt.shortmess:append("sI")
 opt.showmode = false
-opt.signcolumn = "number"
+opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
 opt.softtabstop = 2
@@ -31,7 +31,6 @@ opt.updatetime = 250
 opt.whichwrap:append("<>[]hl")
 opt.wildmode = "longest:full,full"
 opt.wrap = false
--- opt.guicursor = ""
 
 -- Helper function for transparency formatting
 local alpha = function()
@@ -46,3 +45,8 @@ if vim.g.neovide then
 	vim.g.transparency = 0.
 	vim.g.neovide_background_color = "#0f1117" .. alpha()
 end
+
+-- vim.cmd([[
+--   set foldmethod=expr
+--   set foldexpr=nvim_treesitter#foldexpr()
+-- ]])

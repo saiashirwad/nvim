@@ -1,158 +1,118 @@
 return {
 	{
-		"neanias/everforest-nvim",
-		version = false,
-		lazy = false,
-		priority = 1000,
+		"RRethy/base16-nvim",
 		config = function()
-			require("everforest").setup({
-				background = "hard",
-				transparent_background_level = 100,
-				italics = true,
-				disable_italic_comments = false,
-				sign_column_background = "none",
-				ui_contrast = "low",
-				dim_inactive_windows = false,
-				diagnostic_text_highlight = false,
-				diagnostic_virtual_text = "coloured",
-				diagnostic_line_highlight = false,
-				spell_foreground = false,
-				show_eob = true,
-				float_style = "bright",
-				---@param highlight_groups Highlights
-				---@param palette Palette
-				on_highlights = function(highlight_groups, palette) end,
-				---@param palette Palette
-				colours_override = function(palette) end,
-			})
+			-- require("base16-colorscheme").setup({
+			-- 	base00 = "#181818",
+			-- 	base01 = "#282828",
+			-- 	base02 = "#383838",
+			-- 	base03 = "#585858",
+			-- 	base04 = "#b8b8b8",
+			-- 	base05 = "#d8d8d8",
+			-- 	base06 = "#e8e8e8",
+			-- 	base07 = "#f8f8f8",
+			-- 	base08 = "#f8f8f8",
+			-- 	base09 = "#dc9656",
+			-- 	base0A = "#f7ca88",
+			-- 	base0B = "#a1b56c",
+			-- 	base0C = "#86c1b9",
+			-- 	base0D = "#7cafc2",
+			-- 	base0E = "#ba8baf",
+			-- 	base0F = "#a16946",
+			-- })
 		end,
 	},
 
 	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {},
+		"EdenEast/nightfox.nvim",
+
 		config = function()
-			vim.cmd("colorscheme tokyonight-storm")
-		end,
-	},
-
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		config = function()
-			require("rose-pine").setup({
-				variant = "moon", -- auto, main, moon, or dawn
-				dark_variant = "main", -- main, moon, or dawn
-				dim_inactive_windows = false,
-				extend_background_behind_borders = true,
-
-				enable = {
-					terminal = true,
-					legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-					migrations = true, -- Handle deprecated options automatically
+			require("nightfox").setup({
+				options = {
+					compile_path = vim.fn.stdpath("cache") .. "/nightfox",
+					compile_file_suffix = "_compiled", -- Compiled file suffix
+					transparent = false, -- Disable setting background
+					terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+					dim_inactive = false, -- Non focused panes set to alternative background
+					module_default = true, -- Default enable value for modules
+					colorblind = {
+						enable = true, -- Enable colorblind support
+						simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
+						severity = {
+							protan = 0, -- Severity [0,1] for protan (red)
+							deutan = 0, -- Severity [0,1] for deutan (green)
+							tritan = 0, -- Severity [0,1] for tritan (blue)
+						},
+					},
+					styles = { -- Style to be applied to different syntax groups
+						comments = "NONE", -- Value is any valid attr-list value `:help attr-list`
+						conditionals = "NONE",
+						constants = "NONE",
+						functions = "NONE",
+						keywords = "NONE",
+						numbers = "NONE",
+						operators = "NONE",
+						strings = "NONE",
+						types = "NONE",
+						variables = "NONE",
+					},
+					inverse = { -- Inverse highlight for different types
+						match_paren = false,
+						visual = false,
+						search = false,
+					},
+					modules = { -- List of various plugins and additional options
+						-- ...
+					},
 				},
-
-				styles = {
-					bold = true,
-					italic = false,
-					transparency = false,
-				},
-
-				groups = {
-					border = "muted",
-					link = "iris",
-					panel = "surface",
-
-					error = "love",
-					hint = "iris",
-					info = "foam",
-					note = "pine",
-					todo = "rose",
-					warn = "gold",
-
-					git_add = "foam",
-					git_change = "rose",
-					git_delete = "love",
-					git_dirty = "rose",
-					git_ignore = "muted",
-					git_merge = "iris",
-					git_rename = "pine",
-					git_stage = "iris",
-					git_text = "rose",
-					git_untracked = "subtle",
-
-					h1 = "iris",
-					h2 = "foam",
-					h3 = "rose",
-					h4 = "gold",
-					h5 = "pine",
-					h6 = "foam",
-				},
-
-				highlight_groups = {
-					-- Comment = { fg = "foam" },
-					-- VertSplit = { fg = "muted", bg = "muted" },
-				},
-
-				before_highlight = function(group, highlight, palette)
-					-- Disable all undercurls
-					-- if highlight.undercurl then
-					--     highlight.undercurl = false
-					-- end
-					--
-					-- Change palette colour
-					-- if highlight.fg == palette.pine then
-					--     highlight.fg = palette.foam
-					-- end
-				end,
+				palettes = {},
+				specs = {},
+				groups = {},
 			})
 
-			-- vim.cmd("colorscheme rose-pine")
-			-- vim.cmd("colorscheme rose-pine-main")
-			-- vim.cmd("colorscheme rose-pine-moon")
-			-- vim.cmd("colorscheme rose-pine-dawn")
+			-- vim.cmd([[ colorscheme nightfox]])
 		end,
 	},
 
 	{
-		"mcchrish/zenbones.nvim",
-		dependencies = { "rktjmp/lush.nvim" },
+		"Mofiqul/vscode.nvim",
 		config = function()
-			-- vim.cmd("colorscheme zenbones")
+			local c = require("vscode.colors").get_colors()
+			require("vscode").setup({
+				transparent = false,
+				italic_comments = false,
+				underline_links = true,
+			})
+			require("vscode").load()
 		end,
 	},
 
 	-- {
-	-- 	"morhetz/gruvbox",
-	-- 	lazy = false,
+	-- 	"gbprod/nord.nvim",
 	-- 	config = function()
-	-- 		vim.cmd("colorscheme gruvbox")
-	-- 	end,
-	-- },
-
-	-- {
-	-- 	"RRethy/base16-nvim",
-	-- 	config = function()
-	-- 		require("base16-colorscheme").setup({
-	-- 			base00 = "#181818",
-	-- 			base01 = "#282828",
-	-- 			base02 = "#383838",
-	-- 			base03 = "#585858",
-	-- 			base04 = "#b8b8b8",
-	-- 			base05 = "#d8d8d8",
-	-- 			base06 = "#e8e8e8",
-	-- 			base07 = "#f8f8f8",
-	-- 			base08 = "#f8f8f8",
-	-- 			base09 = "#dc9656",
-	-- 			base0A = "#f7ca88",
-	-- 			base0B = "#a1b56c",
-	-- 			base0C = "#86c1b9",
-	-- 			base0D = "#7cafc2",
-	-- 			base0E = "#ba8baf",
-	-- 			base0F = "#a16946",
+	-- 		require("nord").setup({
+	-- 			-- your configuration comes here
+	-- 			-- or leave it empty to use the default settings
+	-- 			transparent = true, -- Enable this to disable setting the background color
+	-- 			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+	-- 			diff = { mode = "bg" }, -- enables/disables colorful backgrounds when used in diff mode. values : [bg|fg]
+	-- 			borders = true, -- Enable the border between verticaly split windows visible
+	-- 			errors = { mode = "bg" }, -- Display mode for errors and diagnostics
+	-- 			-- values : [bg|fg|none]
+	-- 			search = { theme = "vim" }, -- theme for highlighting search results
+	-- 			-- values : [vim|vscode]
+	-- 			styles = {
+	-- 				-- Style to be applied to different syntax groups
+	-- 				-- Value is any valid attr-list value for `:help nvim_set_hl`
+	-- 				comments = { italic = true },
+	-- 				keywords = {},
+	-- 				functions = {},
+	-- 				variables = {},
+	-- 			},
+	--
+	-- 			on_highlights = function(highlights, colors) end,
 	-- 		})
+	-- 		vim.cmd([[colorscheme nord]])
 	-- 	end,
 	-- },
 }

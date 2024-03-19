@@ -1,3 +1,10 @@
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf })
+	end,
+})
+
 return {
 	{
 		"stevearc/conform.nvim",
@@ -27,6 +34,9 @@ return {
 					ocaml = { "ocamlformat" },
 					c = { "clang-format" },
 					cpp = { "clang-format" },
+					elm = { "elm-format" },
+					purescript = { "purty" },
+					clojure = { "cljstyle" },
 				},
 				formatters = {
 					prisma = {

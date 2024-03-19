@@ -98,6 +98,7 @@ return {
 				"ocamllsp",
 				"hls",
 				"biome",
+				"elmls",
 				"prismals",
 				"svelte",
 				"tailwindcss",
@@ -105,6 +106,8 @@ return {
 				"pyright",
 				"rust_analyzer",
 				"astro",
+				"purescriptls",
+				"clojure_lsp",
 			}
 
 			local default_diagnostic_config = {

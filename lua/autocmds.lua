@@ -10,13 +10,6 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "tabdo wincmd =",
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		require("conform").format({ bufnr = args.buf })
-	end,
-})
-
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "*.prisma",
 	callback = function()
@@ -37,12 +30,3 @@ vim.api.nvim_create_user_command("ClangFormat", function()
 end, {
 	nargs = 0,
 })
-
--- create neovim commmand clang format
-
--- vim.api.nvim_create_autocmd("BufWritePre", {
--- 	pattern = "yabairc",
--- 	callback = function()
--- 		vim.cmd("!yabai --restart-service")
--- 	end,
--- })

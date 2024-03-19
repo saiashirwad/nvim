@@ -24,6 +24,10 @@ return {
 				autotag = {
 					enable = true,
 				},
+				fold = {
+					enable = true,
+					indent = true,
+				},
 				incremental_selection = {
 					enable = true,
 					keymaps = {
