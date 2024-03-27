@@ -20,3 +20,5 @@ require("keymaps")
 require("autocmds")
 
 require("lazy").setup("plugins")
+
+vim.keymap.set("n", "<leader>lr", ":Lazy reload ")

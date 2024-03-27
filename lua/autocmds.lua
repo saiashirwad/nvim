@@ -14,19 +14,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "*.prisma",
 	callback = function()
 		vim.cmd("w")
-		vim.cmd([[ !pnpm prisma format ]])
+		vim.cmd([[!pnpm prisma format]])
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-	pattern = "kitty.conf",
-	callback = function()
-		vim.cmd("!kitty @ set-colors --all --configured ~/.config/kitty/kitty.conf")
-	end,
-})
+local clang_format = function()
+	vim.cmd([[: % !clang - format]])
+end
 
-vim.api.nvim_create_user_command("ClangFormat", function()
-	vim.cmd([[ :%!clang-format ]])
-end, {
-	nargs = 0,
-})
+vim.api.nvim_create_user_command("ClangFormat", clang_format, { nargs = 0 })

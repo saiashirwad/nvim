@@ -15,4 +15,13 @@ return {
 			tabpage_section = "left",
 		},
 	},
+
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	version = "*",
+	-- 	dependencies = "nvim-tree/nvim-web-devicons",
+	-- 	opts = {},
+	-- },
 }

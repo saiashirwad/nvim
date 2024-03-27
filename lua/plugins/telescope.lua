@@ -60,6 +60,14 @@ return {
 						telescope.live_grep()
 					end,
 				},
+
+				{
+					"<leader>fl",
+					function()
+						telescope.resume()
+					end,
+				},
+
 				{
 					"gd",
 					function()

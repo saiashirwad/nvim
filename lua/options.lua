@@ -31,22 +31,3 @@ opt.updatetime = 250
 opt.whichwrap:append("<>[]hl")
 opt.wildmode = "longest:full,full"
 opt.wrap = false
-
--- Helper function for transparency formatting
-local alpha = function()
-	return string.format("%x", math.floor(255 * vim.g.transparency or 0.8))
-end
-
-if vim.g.neovide then
-	vim.o.guifont = "Fira Code"
-	vim.g.neovide_cursor_vfx_mode = "railgun"
-
-	vim.g.neovide_transparency = 0.0
-	vim.g.transparency = 0.
-	vim.g.neovide_background_color = "#0f1117" .. alpha()
-end
-
--- vim.cmd([[
---   set foldmethod=expr
---   set foldexpr=nvim_treesitter#foldexpr()
--- ]])

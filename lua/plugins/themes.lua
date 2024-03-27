@@ -1,118 +1,75 @@
 return {
 	{
-		"RRethy/base16-nvim",
+		"LunarVim/darkplus.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			-- require("base16-colorscheme").setup({
-			-- 	base00 = "#181818",
-			-- 	base01 = "#282828",
-			-- 	base02 = "#383838",
-			-- 	base03 = "#585858",
-			-- 	base04 = "#b8b8b8",
-			-- 	base05 = "#d8d8d8",
-			-- 	base06 = "#e8e8e8",
-			-- 	base07 = "#f8f8f8",
-			-- 	base08 = "#f8f8f8",
-			-- 	base09 = "#dc9656",
-			-- 	base0A = "#f7ca88",
-			-- 	base0B = "#a1b56c",
-			-- 	base0C = "#86c1b9",
-			-- 	base0D = "#7cafc2",
-			-- 	base0E = "#ba8baf",
-			-- 	base0F = "#a16946",
-			-- })
+			-- vim.cmd([[ colorscheme darkplus]])
 		end,
 	},
 
 	{
-		"EdenEast/nightfox.nvim",
-
+		"marko-cerovac/material.nvim",
+		lazy = false,
+		priority = 1000,
 		config = function()
-			require("nightfox").setup({
-				options = {
-					compile_path = vim.fn.stdpath("cache") .. "/nightfox",
-					compile_file_suffix = "_compiled", -- Compiled file suffix
-					transparent = false, -- Disable setting background
-					terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
-					dim_inactive = false, -- Non focused panes set to alternative background
-					module_default = true, -- Default enable value for modules
-					colorblind = {
-						enable = true, -- Enable colorblind support
-						simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
-						severity = {
-							protan = 0, -- Severity [0,1] for protan (red)
-							deutan = 0, -- Severity [0,1] for deutan (green)
-							tritan = 0, -- Severity [0,1] for tritan (blue)
-						},
-					},
-					styles = { -- Style to be applied to different syntax groups
-						comments = "NONE", -- Value is any valid attr-list value `:help attr-list`
-						conditionals = "NONE",
-						constants = "NONE",
-						functions = "NONE",
-						keywords = "NONE",
-						numbers = "NONE",
-						operators = "NONE",
-						strings = "NONE",
-						types = "NONE",
-						variables = "NONE",
-					},
-					inverse = { -- Inverse highlight for different types
-						match_paren = false,
-						visual = false,
-						search = false,
-					},
-					modules = { -- List of various plugins and additional options
-						-- ...
-					},
+			require("material").setup({
+
+				contrast = {
+					terminal = true, -- Enable contrast for the built-in terminal
+					sidebars = true, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+					floating_windows = true, -- Enable contrast for floating windows
+					cursor_line = true, -- Enable darker background for the cursor line
+					non_current_windows = false, -- Enable contrasted background for non-current windows
+					filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
 				},
-				palettes = {},
-				specs = {},
-				groups = {},
+
+				styles = { -- Give comments style such as bold, italic, underline etc.
+					comments = { --[[ italic = true ]]
+						italic = false,
+					},
+					strings = { --[[ bold = true ]]
+					},
+					keywords = { --[[ underline = true ]]
+					},
+					functions = { --[[ bold = true, undercurl = true ]]
+					},
+					variables = {},
+					operators = {},
+					types = {},
+				},
+
+				plugins = { -- Uncomment the plugins that you use to highlight them
+					"flash",
+					"gitsigns",
+					"mini",
+					"noice",
+					"nvim-cmp",
+					"nvim-web-devicons",
+					"telescope",
+					"trouble",
+					"nvim-notify",
+				},
+
+				disable = {
+					colored_cursor = false, -- Disable the colored cursor
+					borders = false, -- Disable borders between verticaly split windows
+					background = false, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
+					term_colors = false, -- Prevent the theme from setting terminal colors
+					eob_lines = false, -- Hide the end-of-buffer lines
+				},
+
+				high_visibility = {
+					lighter = false, -- Enable higher contrast text for lighter style
+					darker = false, -- Enable higher contrast text for darker style
+				},
+
+				lualine_style = "stealth", -- Lualine style ( can be 'stealth' or 'default' )
+
+				async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
 			})
 
-			-- vim.cmd([[ colorscheme nightfox]])
+			vim.cmd([[ colorscheme material-palenight]])
 		end,
 	},
-
-	{
-		"Mofiqul/vscode.nvim",
-		config = function()
-			local c = require("vscode.colors").get_colors()
-			require("vscode").setup({
-				transparent = false,
-				italic_comments = false,
-				underline_links = true,
-			})
-			require("vscode").load()
-		end,
-	},
-
-	-- {
-	-- 	"gbprod/nord.nvim",
-	-- 	config = function()
-	-- 		require("nord").setup({
-	-- 			-- your configuration comes here
-	-- 			-- or leave it empty to use the default settings
-	-- 			transparent = true, -- Enable this to disable setting the background color
-	-- 			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-	-- 			diff = { mode = "bg" }, -- enables/disables colorful backgrounds when used in diff mode. values : [bg|fg]
-	-- 			borders = true, -- Enable the border between verticaly split windows visible
-	-- 			errors = { mode = "bg" }, -- Display mode for errors and diagnostics
-	-- 			-- values : [bg|fg|none]
-	-- 			search = { theme = "vim" }, -- theme for highlighting search results
-	-- 			-- values : [vim|vscode]
-	-- 			styles = {
-	-- 				-- Style to be applied to different syntax groups
-	-- 				-- Value is any valid attr-list value for `:help nvim_set_hl`
-	-- 				comments = { italic = true },
-	-- 				keywords = {},
-	-- 				functions = {},
-	-- 				variables = {},
-	-- 			},
-	--
-	-- 			on_highlights = function(highlights, colors) end,
-	-- 		})
-	-- 		vim.cmd([[colorscheme nord]])
-	-- 	end,
-	-- },
 }
