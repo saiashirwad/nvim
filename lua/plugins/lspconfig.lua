@@ -30,16 +30,14 @@ M.config = function()
     group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
     callback = function()
       set_keymaps {
-        n = {
-          { 'gd', require('telescope.builtin').lsp_definitions },
-          { 'gr', require('telescope.builtin').lsp_references },
-          { 'gI', require('telescope.builtin').lsp_implementations },
-          { '<leader>D', require('telescope.builtin').lsp_type_definitions },
-          { '<leader>rn', vim.lsp.buf.rename },
-          { '<leader>ca', vim.lsp.buf.code_action },
-          { 'K', vim.lsp.buf.hover },
-          { 'gD', vim.lsp.buf.declaration },
-        },
+        { 'n', 'gd', require('telescope.builtin').lsp_definitions },
+        { 'n', 'gr', require('telescope.builtin').lsp_references },
+        { 'n', 'gI', require('telescope.builtin').lsp_implementations },
+        { 'n', '<leader>D', require('telescope.builtin').lsp_type_definitions },
+        { 'n', '<leader>rn', vim.lsp.buf.rename },
+        { 'n', '<leader>ca', vim.lsp.buf.code_action },
+        { 'n', 'K', vim.lsp.buf.hover },
+        { 'n', 'gD', vim.lsp.buf.declaration },
       }
     end,
   })

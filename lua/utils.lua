@@ -1,13 +1,17 @@
+require 'types'
 local M = {}
 
+---@param plugin LazyPluginSpec
+M.lazy_plugin = function(plugin)
+  return plugin
+end
+
 M.set_keymaps = function(keymaps)
-  for mode, mode_keymaps in ipairs(keymaps) do
-    for _, keymap in ipairs(mode_keymaps) do
-      vim.keymap.set(mode, keymap[1], keymap[2], {
-        silent = true,
-        remap = true,
-      })
-    end
+  for _, keymap in ipairs(keymaps) do
+    vim.keymap.set(keymap[1], keymap[2], keymap[3], {
+      silent = true,
+      remap = true,
+    })
   end
 end
 
