@@ -1,5 +1,5 @@
 local utils = require 'utils'
-local nnoremap = utils.nnoremap
+local set_keymaps = utils.set_keymaps
 
 ---@type LazyPluginSpec
 local M = {
@@ -29,14 +29,18 @@ M.config = function()
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
     callback = function()
-      nnoremap('gd', require('telescope.builtin').lsp_definitions)
-      nnoremap('gr', require('telescope.builtin').lsp_references)
-      nnoremap('gI', require('telescope.builtin').lsp_implementations)
-      nnoremap('<leader>D', require('telescope.builtin').lsp_type_definitions)
-      nnoremap('<leader>rn', vim.lsp.buf.rename)
-      nnoremap('<leader>ca', vim.lsp.buf.code_action)
-      nnoremap('K', vim.lsp.buf.hover)
-      nnoremap('gD', vim.lsp.buf.declaration)
+      set_keymaps {
+        n = {
+          { 'gd', require('telescope.builtin').lsp_definitions },
+          { 'gr', require('telescope.builtin').lsp_references },
+          { 'gI', require('telescope.builtin').lsp_implementations },
+          { '<leader>D', require('telescope.builtin').lsp_type_definitions },
+          { '<leader>rn', vim.lsp.buf.rename },
+          { '<leader>ca', vim.lsp.buf.code_action },
+          { 'K', vim.lsp.buf.hover },
+          { 'gD', vim.lsp.buf.declaration },
+        },
+      }
     end,
   })
 

@@ -1,4 +1,13 @@
 require('texoport').init {
+  require 'plugins.cmp',
+  require 'plugins.comment',
+  require 'plugins.copilot',
+  require 'plugins.formatter',
+  require 'plugins.lint',
+  require 'plugins.lspconfig',
+  require 'plugins.neo_tree',
+  require 'plugins.telescope',
+  require 'plugins.treesitter',
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -99,13 +108,4 @@ require('texoport').init {
       }
     end,
   },
-  require 'plugins.cmp',
-  require 'plugins.comment',
-  require 'plugins.copilot',
-  require 'plugins.formatter',
-  require 'plugins.lint',
-  require 'plugins.lspconfig',
-  require 'plugins.neo_tree',
-  require 'plugins.telescope',
-  require 'plugins.treesitter',
 }
