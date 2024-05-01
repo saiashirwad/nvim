@@ -15,6 +15,4 @@ M.set_keymaps = function(keymaps)
   end
 end
 
-M.set_keymaps {}
-
 return M
