@@ -8,13 +8,13 @@ end
 
 ---@param plugins LazyPluginSpec[]
 M.init = function(plugins)
-  require 'sai.keymaps'
-  require 'sai.autocmds'
-  require 'sai.options'
-
   vim.g.have_nerd_font = true
   vim.g.mapleader = ' '
   vim.g.maplocalleader = ' '
+
+  require 'sai.keymaps'
+  require 'sai.autocmds'
+  require 'sai.options'
 
   local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
   if not vim.loop.fs_stat(lazypath) then
