@@ -1,6 +1,6 @@
 require('sai.utils').init {
   { 'tpope/vim-sleuth' },
-  require 'sai.tmux_navigation',
+  require 'plugins.tmux_navigation',
   require 'plugins.cmp',
   require 'plugins.lint',
   require 'plugins.neo_tree',
