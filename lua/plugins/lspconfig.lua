@@ -25,6 +25,55 @@ local organize_imports = function()
   vim.lsp.buf.execute_command(params)
 end
 
+local server_names = {
+  'html',
+  'cssls',
+  'marksman',
+  'volar',
+  'clangd',
+  'ocamllsp',
+  'hls',
+  'biome',
+  'elmls',
+  'prismals',
+  'svelte',
+  'jsonls',
+  'pyright',
+  'rust_analyzer',
+  'astro',
+  'purescriptls',
+  'clojure_lsp',
+}
+
+local servers = {
+  tsserver = {
+    commands = {
+      OrganizeImports = {
+        organize_imports,
+        description = 'Organize Imports',
+      },
+    },
+  },
+
+  lua_ls = {
+    settings = {
+      Lua = {
+        completion = {
+          callSnippet = 'Replace',
+        },
+      },
+    },
+  },
+
+  hls = {
+    filetypes = { 'haskell', 'lhaskell', 'cabal' },
+  },
+}
+
+for _, value in pairs(server_names) do
+  servers[value] = {}
+end
+
 M.config = function()
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -45,27 +94,6 @@ M.config = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-  local servers = {
-    tsserver = {
-      commands = {
-        OrganizeImports = {
-          organize_imports,
-          description = 'Organize Imports',
-        },
-      },
-    },
-
-    lua_ls = {
-      settings = {
-        Lua = {
-          completion = {
-            callSnippet = 'Replace',
-          },
-        },
-      },
-    },
-  }
-
   require('mason').setup()
 
   local ensure_installed = vim.tbl_keys(servers)
@@ -82,5 +110,7 @@ M.config = function()
     },
   }
 end
+
+print(vim.inspect(vim.tbl_keys(require 'lspconfig')))
 
 return M
