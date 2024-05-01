@@ -6,16 +6,18 @@ local organize_imports = function()
   vim.lsp.buf.execute_command(params)
 end
 
-return require('utils').lazy_plugin {
+---@type LazyPluginSpec
+return {
   'neovim/nvim-lspconfig',
   dependencies = {
     { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-
+    {
+      'folke/neodev.nvim',
+      opts = {},
+    },
     { 'j-hui/fidget.nvim', opts = {} },
-
-    { 'folke/neodev.nvim', opts = {} },
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {

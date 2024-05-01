@@ -1,4 +1,5 @@
-return require('utils').lazy_plugin {
+---@type LazyPluginSpec
+return {
   'nvim-neo-tree/neo-tree.nvim',
   version = '*',
   dependencies = {

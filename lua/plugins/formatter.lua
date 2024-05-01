@@ -1,4 +1,5 @@
-return require('utils').lazy_plugin {
+---@type LazyPluginSpec
+return {
   'stevearc/conform.nvim',
   lazy = false,
   keys = {

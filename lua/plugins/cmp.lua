@@ -1,4 +1,5 @@
-return require('utils').lazy_plugin {
+---@type LazyPluginSpec
+return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
@@ -11,12 +12,12 @@ return require('utils').lazy_plugin {
         return 'make install_jsregexp'
       end)(),
       dependencies = {
-        {
-          'rafamadriz/friendly-snippets',
-          config = function()
-            require('luasnip.loaders.from_vscode').lazy_load()
-          end,
-        },
+        -- {
+        --   'rafamadriz/friendly-snippets',
+        --   config = function()
+        --     require('luasnip.loaders.from_vscode').lazy_load()
+        --   end,
+        -- },
       },
     },
     'saadparwaiz1/cmp_luasnip',

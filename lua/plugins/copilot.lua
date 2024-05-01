@@ -1,4 +1,5 @@
-return require('utils').lazy_plugin {
+---@type LazyPluginSpec
+return {
   'zbirenbaum/copilot.lua',
   cmd = 'Copilot',
   event = 'InsertEnter',

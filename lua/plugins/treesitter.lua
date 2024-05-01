@@ -1,4 +1,5 @@
-return require('lua.utils').lazy_plugin {
+---@type LazyPluginSpec
+return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   dependencies = {

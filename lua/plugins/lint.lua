@@ -1,4 +1,5 @@
-return require('utils').lazy_plugin {
+---@type LazyPluginSpec
+return {
   'mfussenegger/nvim-lint',
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
