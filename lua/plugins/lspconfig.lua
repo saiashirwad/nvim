@@ -111,6 +111,4 @@ M.config = function()
   }
 end
 
-print(vim.inspect(vim.tbl_keys(require 'lspconfig')))
-
 return M
