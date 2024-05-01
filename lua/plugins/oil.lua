@@ -1,4 +1,4 @@
-return require('sai.utils').lazy_plugin {
+return require('utils').lazy_plugin {
   'stevearc/oil.nvim',
   opts = {},
   dependencies = { 'nvim-tree/nvim-web-devicons' },

@@ -6,7 +6,7 @@ local organize_imports = function()
   vim.lsp.buf.execute_command(params)
 end
 
-return require('sai.utils').lazy_plugin {
+return require('utils').lazy_plugin {
   'neovim/nvim-lspconfig',
   dependencies = {
     { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants

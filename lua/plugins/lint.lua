@@ -1,4 +1,4 @@
-return require('sai.utils').lazy_plugin {
+return require('utils').lazy_plugin {
   'mfussenegger/nvim-lint',
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()

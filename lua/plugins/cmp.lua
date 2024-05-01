@@ -1,4 +1,4 @@
-return require('sai.utils').lazy_plugin {
+return require('utils').lazy_plugin {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {

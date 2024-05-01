@@ -1,4 +1,4 @@
-return require('sai.utils').lazy_plugin {
+return require('utils').lazy_plugin {
   'maxmx03/solarized.nvim',
   lazy = false,
   priority = 1000,

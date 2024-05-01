@@ -1,4 +1,4 @@
-return require('sai.utils').lazy_plugin {
+return require('utils').lazy_plugin {
   'echasnovski/mini.nvim',
   config = function()
     require('mini.ai').setup { n_lines = 500 }

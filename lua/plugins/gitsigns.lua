@@ -1,4 +1,4 @@
-return require('sai.utils').lazy_plugin {
+return require('utils').lazy_plugin {
   'lewis6991/gitsigns.nvim',
   opts = {
     signs = {

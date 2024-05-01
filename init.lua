@@ -1,4 +1,4 @@
-require('sai.utils').init {
+require('texoport').init {
   { 'tpope/vim-sleuth' },
   require 'plugins.tmux_navigation',
   require 'plugins.cmp',

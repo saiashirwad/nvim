@@ -1,1 +1,1 @@
-return require('sai.utils').lazy_plugin { 'numToStr/Comment.nvim', opts = {} }
+return require('utils').lazy_plugin { 'numToStr/Comment.nvim', opts = {} }

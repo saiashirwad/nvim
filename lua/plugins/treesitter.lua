@@ -1,4 +1,4 @@
-return require('sai.utils').lazy_plugin {
+return require('lua.utils').lazy_plugin {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   dependencies = {
